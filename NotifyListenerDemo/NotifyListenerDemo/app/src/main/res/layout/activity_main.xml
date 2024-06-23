@@ -20,20 +20,26 @@
 
     <Button
         android:id="@+id/btnConnBLE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="323dp"
+        android:layout_height="84dp"
         android:onClick="onClick"
-        android:text="连接蓝牙设备"
+        android:shadowColor="@color/blue"
+        android:text="Connect To Bluetooth Device\n连接蓝牙设备"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:background="#FF0000"
+        android:backgroundTint="#FF0000"
+        app:rippleColor="#0026F8" />
 
     <TextView
         android:id="@+id/tvBLEState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="蓝牙链接状态："
+        android:layout_width="310dp"
+        android:layout_height="142dp"
+        android:text="BlueTooth Connection State\n蓝牙链接状态："
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

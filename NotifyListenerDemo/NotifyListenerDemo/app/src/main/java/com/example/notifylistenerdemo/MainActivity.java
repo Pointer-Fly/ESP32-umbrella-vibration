@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements NotifyListener {
 
     private String BLEGattServerAddress = "CC:7B:5C:1E:17:3E";
 
+//    private String BLEGattServerAddress = "30:C9:22:12:DB:3E";
     BluetoothGattCharacteristic characteristic;
 
     private BluetoothLeScanner bluetoothLeScanner;
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements NotifyListener {
     private static final long SCAN_PERIOD = 10000;
 
     private TextView tvBLEState;
+
 
     private void scanLeDevice() {
         if (!scanning) {
@@ -294,9 +296,9 @@ public class MainActivity extends AppCompatActivity implements NotifyListener {
                     return;
                 }
                 gatt.discoverServices();
-                mHandler.obtainMessage(SET_TEXT, "蓝牙连接成功").sendToTarget();
+                mHandler.obtainMessage(SET_TEXT, "Bluetooth Connect Success\n蓝牙连接成功").sendToTarget();
             } else if (newState == BluetoothGatt.STATE_DISCONNECTED) {
-                mHandler.obtainMessage(SET_TEXT, "蓝牙连接断开").sendToTarget();
+                mHandler.obtainMessage(SET_TEXT, "Bluetooth Connect Success\n蓝牙连接断开").sendToTarget();
             }
         }
 
@@ -306,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements NotifyListener {
                 // get the service
                 characteristic = gatt.getService(UUID.fromString(SERVICE_UUID)).getCharacteristic(UUID.fromString(WRITE_UUID));
             } else {
-                mHandler.obtainMessage(SET_TEXT, "服务未发现").sendToTarget();
+                mHandler.obtainMessage(SET_TEXT, "Service Not Found\n服务未发现").sendToTarget();
             }
         }
 
@@ -432,21 +434,21 @@ public class MainActivity extends AppCompatActivity implements NotifyListener {
     public void onReceiveMessage(int type) {
         switch (type) {
             case N_MESSAGE:
-                textView.setText("收到短信消息");
+                textView.setText("Receive Message\n收到短信消息");
                 //震动一下，通过蓝牙传递一个特征值，表名这是消息
                 characteristic.setValue("1");
                 break;
             case N_CALL:
-                textView.setText("收到来电消息");
+                textView.setText("Receive Calling\n收到来电消息");
                 //震动一下，通过蓝牙传递一个特征值，表名这是电话
                 characteristic.setValue("0");
                 break;
             case N_WX:
-                textView.setText("收到微信消息");
+                textView.setText("Receive WeChat Message\n收到微信消息");
                 characteristic.setValue("1");
                 break;
             case N_QQ:
-                textView.setText("收到QQ消息");
+                textView.setText("Receive QQ Message\n收到QQ消息");
                 characteristic.setValue("1");
 //                this.isInformation=true;
                 //将this.isInformation通过某种渠道传递给蓝牙
@@ -469,16 +471,16 @@ public class MainActivity extends AppCompatActivity implements NotifyListener {
     public void onRemovedMessage(int type) {
         switch (type) {
             case N_MESSAGE:
-                textView.setText("移除短信消息");
+                textView.setText("Remove \n移除短信消息");
                 break;
             case N_CALL:
-                textView.setText("移除来电消息");
+                textView.setText("Remove \n移除来电消息");
                 break;
             case N_WX:
-                textView.setText("移除微信消息");
+                textView.setText("Remove\n移除微信消息");
                 break;
             case N_QQ:
-                textView.setText("移除QQ消息");
+                textView.setText("Remove\n移除QQ消息");
                 break;
             default:
                 break;
@@ -502,7 +504,7 @@ public class MainActivity extends AppCompatActivity implements NotifyListener {
         //消息时间
         String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINESE).format(new Date(sbn.getPostTime()));
         textView.setText(String.format(Locale.getDefault(),
-                "应用包名：%s\n消息内容：%s\n消息时间：%s\n",
+                "APP Name：%s\nMessage Content：%s\nTime：%s\n",
                 sbn.getPackageName(), msgContent, time));
     }
 

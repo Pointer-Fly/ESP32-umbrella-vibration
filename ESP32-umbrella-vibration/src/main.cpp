@@ -94,9 +94,9 @@ void setup()
 
   pinMode(KEY_PIN, INPUT_PULLUP);
   // // print address
-  // BLEAddress address = BLEDevice::getAddress();
-  // String addressStr = address.toString().c_str();
-  // Serial.println(addressStr);
+  BLEAddress address = BLEDevice::getAddress();
+  String addressStr = address.toString().c_str();
+  Serial.println(addressStr);
 
   xTaskCreate(key_scan_task, "key_scan_task", 1024 * 8, NULL, 5, NULL);
 }
